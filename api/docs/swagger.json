@@ -1,0 +1,133 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "version": "1.0.0",
+        "title": "Node CMS",
+        "description": "Node CMS"
+    },
+    "servers":[
+        {
+            "url": "http://localhost/api"
+        }
+    ],
+    "tags": [
+        {
+            "name":"Users",
+            "description": "User's routes"
+        },
+        {
+            "name":"Auth",
+            "description": "Auth's routes"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get full user's list",
+                "description": "description of User's list route",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": ["Users"],
+                "summary": "Create new user",
+                "description": "description of User's list route",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/User/create"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/users/{user_id}": {
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get full user's list",
+                "description": "description of User's list route",
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "type": "integer",
+                        "default": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "create": {
+                "type": "object",
+                "properties": {
+                    "firstName": {
+                        "type": "string",
+                        "example": "John"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Dow"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "Dow@test.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456789"
+                    },
+                    "age": {
+                        "type": "integer",
+                        "example": "21"
+                    },
+                    "role": {
+                        "type": "string",
+                        "example": "user"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
